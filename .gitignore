@@ -1,0 +1,6 @@
+/public/*
+!/public/.keep
+node_modules
+.env
+.firebaserc
+*.log
