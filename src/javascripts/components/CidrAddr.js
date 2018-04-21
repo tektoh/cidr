@@ -1,4 +1,5 @@
 import React from 'react'
+import IpAddr from '../components/IpAddr'
 
 export default ({ cidrAddr }) => (
   <div>
@@ -7,30 +8,29 @@ export default ({ cidrAddr }) => (
         return (
           <dl>
             <dt>サブネット</dt>
-            <dd>{ntoa(cidrAddr.networkAddr)}/{cidrAddr.mask}</dd>
+            <dd><IpAddr nAddr={cidrAddr.networkAddr} />/{cidrAddr.mask}</dd>
 
             <dt>ネットマスク</dt>
-            <dd>{ntoa(cidrAddr.maskAddr)}</dd>
+            <dd><IpAddr nAddr={cidrAddr.maskAddr} /></dd>
 
             <dt>ネットワークアドレス</dt>
-            <dd>{ntoa(cidrAddr.networkAddr)}</dd>
+            <dd><IpAddr nAddr={cidrAddr.networkAddr} /></dd>
 
             <dt>ブロードキャストアドレス</dt>
-            <dd>{ntoa(cidrAddr.broadcastAddr)}</dd>
+            <dd><IpAddr nAddr={cidrAddr.broadcastAddr} /></dd>
 
             <dt>アドレスレンジ</dt>
             <dd>
-              {ntoa(cidrAddr.addrRangeStart)}
-              {(() => {
-                if (cidrAddr.addrRangeEnd) {
-                  return <span>〜</span>
-                }
-              })()}
-              {(() => {
-                if (cidrAddr.addrRangeEnd) {
-                  return <span>{ntoa(cidrAddr.addrRangeEnd)}</span>
-                }
-              })()}
+              <IpAddr nAddr={cidrAddr.addrRangeStart} />
+              <ShowIf visible={cidrAddr.addrRangeEnd}>
+                {' '}〜{' '}
+              </ShowIf>
+              <ShowIf visible={cidrAddr.addrRangeEnd}>
+                <IpAddr nAddr={cidrAddr.addrRangeEnd} />
+              </ShowIf>
+              <ShowIf visible={cidrAddr.addrRangeEnd}>
+                {' '}({cidrAddr.addrRangeEnd - cidrAddr.addrRangeStart + 1}個)
+              </ShowIf>
             </dd>
           </dl>
         )
@@ -39,10 +39,4 @@ export default ({ cidrAddr }) => (
   </div>
 )
 
-const ntoa = nAddr => {
-  let addrs = []
-  for (let oct = 3; oct >= 0; oct--) {
-    addrs.push(nAddr >> 8 * oct & 255)
-  }
-  return addrs.join('.')
-}
+const ShowIf = ({ visible, children }) => <span>{visible ? children : null}</span>
