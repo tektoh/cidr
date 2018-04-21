@@ -20,30 +20,32 @@ const mapDispatchToProps = (dispatch) => {
       if (regexp.test(cidr)) {
         const [strAddr, strMask] = cidr.split('/')
 
-        let addr = 0
-
+        // Subnet Address
         let addrOctets = strAddr.split('.')
-        addr = parseInt(addrOctets[0]) * (1 << 24) +
+        let addr = parseInt(addrOctets[0]) * (1 << 24) +
           parseInt(addrOctets[1]) * (1 << 16) +
           parseInt(addrOctets[2]) * (1 << 8) +
           parseInt(addrOctets[3])
 
+        // Subnet Mask
         let mask = parseInt(strMask)
         let maskAddr = 0
         for (let i = 1; i <= mask; i++) {
           maskAddr += 2 ** (32 - i)
         }
 
+        // Network Address
         let networkAddr = addr & maskAddr
 
+        // Broadcast Address
         let broadcastAddr = networkAddr
         for (let i = 0; i < (32 - mask); i++) {
           broadcastAddr += 2 ** i
         }
 
+        // Address Range
         let addrRangeStart = networkAddr + 1
         let addrRangeEnd = broadcastAddr - 1
-
         if (mask > 30) {
           addrRangeStart = addr
           addrRangeEnd = null
