@@ -10,5 +10,6 @@ export default handleActions({
     }
   }
 }, {
-  cidr: ''
+  cidr: '',
+  isValid: false
 })
