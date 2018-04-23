@@ -37,7 +37,7 @@ module.exports = {
       safe: false
     }),
     new HtmlWebpackPlugin({
-      title: '',
+      title: 'CIDRアドレス計算機',
       filename: 'index.html',
       template: 'src/templates/index.pug'
     })
