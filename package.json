@@ -13,7 +13,7 @@
     "deploy": "webpack --config webpack.config.production.js && firebase deploy"
   },
   "dependencies": {
-    "@storybook/react": "^3.4.2",
+    "@storybook/react": "^6.0.0",
     "autoprefixer": "^8.0.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.3",
