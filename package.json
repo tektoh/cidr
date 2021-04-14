@@ -45,7 +45,7 @@
     "redux-define": "^1.1.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "sass-loader": "^6.0.6",
+    "sass-loader": "^11.0.0",
     "style-loader": "^0.23.0",
     "uglifyjs-webpack-plugin": "^1.2.0",
     "webpack": "^3.10.0",
